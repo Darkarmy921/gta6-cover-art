@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vice City Cover Studio: turn your photo and caption into GTA 6-style cover art, offline in your browser, and export it as a PNG.">
+<title>Vice City Cover Studio — GTA 6-style cover art maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VC</span>
+    <div>
+      <h1>Vice City Cover Studio</h1>
+      <p class="tagline">Turn your photo into GTA 6-style cover art. 100% offline — your photos never leave this machine.</p>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><strong>1</strong> Upload</li>
+    <li><strong>2</strong> Style</li>
+    <li><strong>3</strong> Export</li>
+  </ol>
+</header>
+
+<main class="studio">
+  <section class="preview-col">
+    <div class="preview-wrap" id="previewWrap">
+      <canvas id="preview" width="720" height="720"></canvas>
+      <div class="preview-hint" id="previewHint">Drop a photo here, or press “Try a sample”</div>
+    </div>
+    <div class="preview-bar">
+      <button id="btnSample" type="button">Try a sample</button>
+      <button id="btnFillAll" type="button">Use one photo in every panel</button>
+      <button id="btnBeforeAfter" type="button" aria-pressed="false">Hold to see original</button>
+      <button id="btnReset" type="button">Reset</button>
+    </div>
+    <p class="status" id="status" role="status">Ready. Load a photo to begin.</p>
+  </section>
+
+  <aside class="controls">
+    <section class="panel" aria-label="Photos">
+      <h2>1 · Photos</h2>
+      <label class="upload">
+        <span>Add photos</span>
+        <input id="fileInput" type="file" accept="image/*" multiple>
+      </label>
+      <p class="help">Drag a photo onto the preview, or click a panel below to fill it. Drag inside the preview to reposition a photo.</p>
+      <div class="panel-slots" id="panelSlots"></div>
+      <label>Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="50" max="300" value="100">
+      </label>
+      <label class="row"><input id="fitToggle" type="checkbox"> Fit whole photo (no crop)</label>
+      <label class="row"><input id="flipToggle" type="checkbox"> Flip photo</label>
+    </section>
+
+    <section class="panel" aria-label="Layout">
+      <h2>2 · Layout</h2>
+      <div class="choices" id="layoutChoices">
+        <button type="button" data-layout="hero" class="choice is-active">Hero</button>
+        <button type="button" data-layout="split" class="choice">Split</button>
+        <button type="button" data-layout="comic" class="choice">Comic</button>
+        <button type="button" data-layout="grid" class="choice">Grid</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Colour grade">
+      <h2>3 · Colour grade</h2>
+      <div class="choices" id="gradeChoices">
+        <button type="button" data-grade="sunset" class="choice grade-sunset is-active">Vice City Sunset</button>
+        <button type="button" data-grade="neon" class="choice grade-neon">Neon Night</button>
+        <button type="button" data-grade="golden" class="choice grade-golden">Golden Hour</button>
+        <button type="button" data-grade="noir" class="choice grade-noir">Mono Noir</button>
+      </div>
+      <label>Grade strength <span id="gradeVal">70%</span>
+        <input id="gradeStrength" type="range" min="0" max="100" value="70">
+      </label>
+    </section>
+
+    <section class="panel" aria-label="Caption">
+      <h2>4 · Caption</h2>
+      <label>Title
+        <input id="capTitle" type="text" value="VICE CITY" maxlength="24">
+      </label>
+      <label>Subtitle
+        <input id="capSubtitle" type="text" value="MY STORY, MY RULES" maxlength="48">
+      </label>
+      <label>Tagline
+        <input id="capTagline" type="text" value="Coming soon to a street near you" maxlength="64">
+      </label>
+      <div class="choices" id="presetChoices">
+        <button type="button" data-preset="0" class="choice">Vice City</button>
+        <button type="button" data-preset="1" class="choice">Neon Nights</button>
+        <button type="button" data-preset="2" class="choice">Golden Getaway</button>
+      </div>
+      <label>Caption position
+        <select id="capPos">
+          <option value="bottom">Bottom</option>
+          <option value="top">Top</option>
+          <option value="center">Centre</option>
+        </select>
+      </label>
+      <label>Caption colour
+        <input id="capColor" type="color" value="#ffffff">
+      </label>
+      <label>Title size <span id="capSizeVal">100%</span>
+        <input id="capSize" type="range" min="60" max="160" value="100">
+      </label>
+    </section>
+
+    <section class="panel" aria-label="Export">
+      <h2>5 · Export PNG</h2>
+      <div class="choices" id="sizeChoices">
+        <button type="button" data-size="1080x1080" class="choice is-active">1080 × 1080</button>
+        <button type="button" data-size="1080x1350" class="choice">1080 × 1350</button>
+        <button type="button" data-size="1920x1080" class="choice">1920 × 1080</button>
+      </div>
+      <button id="btnExport" type="button" class="export-btn">Download PNG</button>
+      <p class="help" id="exportInfo">Exports at 1080 × 1080.</p>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Original art drawn with code. No Rockstar Games logo, artwork or fonts. Photos stay on your device.</p>
+</footer>
+
+<script src="src/samples.js"></script>
+<script src="src/cover.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
